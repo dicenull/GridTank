@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GridTank", "GridTank\GridTank.vcxproj", "{52A8A98F-CBBF-4848-9E9B-B62B6CD661F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52A8A98F-CBBF-4848-9E9B-B62B6CD661F5}.Debug|x64.ActiveCfg = Debug|x64
+		{52A8A98F-CBBF-4848-9E9B-B62B6CD661F5}.Debug|x64.Build.0 = Debug|x64
+		{52A8A98F-CBBF-4848-9E9B-B62B6CD661F5}.Release|x64.ActiveCfg = Release|x64
+		{52A8A98F-CBBF-4848-9E9B-B62B6CD661F5}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BBD62240-B532-4552-BA66-5B000C12BE9D}
+	EndGlobalSection
+EndGlobal
