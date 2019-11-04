@@ -1,20 +1,36 @@
 ﻿
 # include <Siv3D.hpp> // OpenSiv3D v0.4.1
 
+class Field
+{
+public:
+	Field()
+	{
+		_field = Grid<int>(10, 10);
+	}
+
+	void Draw(int size, Size offset)
+	{
+		for (auto y : step(_field.height()))
+		{
+			for (auto x : step(_field.width()))
+			{
+				Rect(x * size, y * size, size).movedBy(offset).drawFrame();
+			}
+		}
+	}
+
+private:
+	Grid<int> _field;
+};
+
 void Main()
 {
-	Grid<int> field(10, 10);
-	int drawSize = 50;
+	Field field;
 
 	while (System::Update())
 	{
-		for (auto y : step(field.height()))
-		{
-			for (auto x : step(field.width()))
-			{
-				Rect(x * drawSize, y * drawSize, drawSize).drawFrame();
-			}
-		}
+		field.Draw(50, { 10, 10 });
 	}
 }
 
