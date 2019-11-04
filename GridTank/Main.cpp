@@ -17,7 +17,7 @@ public:
 	Point Pos;
 	int Direction;
 
-	double Rad() { return ToRadians(Direction); }
+	double Rad() const { return ToRadians(Direction); }
 
 	Tank()
 	{
@@ -100,9 +100,54 @@ public:
 	{
 		_field = Grid<int>(10, 10);
 		_tanks.push_back(Tank());
+		_turn = 0;
+
+		for (auto i : step(_tanks.size()))
+		{
+			_actions.push_back(Action::Stop);
+		}
 	}
 
-	void Draw(int size, Size offset)
+	void NextStep()
+	{
+		for(auto i = 0;i < _tanks.size();i++)
+		{
+			_tanks[i].ActionBy(_actions[i]);
+		}
+
+		// 領域の中からはみ出さないようにする
+		for (auto &tank : _tanks)
+		{
+			tank.Pos.x = Clamp(tank.Pos.x, 0, (int)_field.width() - 1);
+			tank.Pos.y = Clamp(tank.Pos.y, 0, (int)_field.height() - 1);
+		}
+
+		_turn++;
+
+		ClearPrint();
+		Print << _turn;
+	}
+
+	void Update()
+	{
+		for (auto& action : _actions)
+		{
+			// update
+			// TODO: 列挙の順番でキーを設定しているので直す
+			Array<Key> keys = { KeyW, KeyS, KeyD, KeyA, KeySpace, KeyX };
+
+			for (auto [i, key] : Indexed(keys))
+			{
+				if (key.down())
+				{
+					// tank.ActionBy((Action)i);
+					action = (Action)i;
+				}
+			}
+		}
+	}
+		
+	void Draw(int size, Size offset) const
 	{
 		for (auto y : step(_field.height()))
 		{
@@ -124,26 +169,13 @@ public:
 			Line(origin, origin + dir.setLength(size * 0.4))
 				.movedBy(offset).draw(5, Palette::Lightgreen);
 		}
-
-		for(auto& tank : _tanks)
-		{
-			// update
-			// TODO: 列挙の順番でキーを設定しているので直す
-			Array<Key> keys = { KeyW, KeyS, KeyD, KeyA, KeySpace, KeyX };
-
-			for (auto [i, key] : Indexed(keys))
-			{
-				if (key.down())
-				{
-					tank.ActionBy((Action)i);
-				}
-			}
-		}
 	}
 
 private:
 	Grid<int> _field;
 	Array<Tank> _tanks;
+	Array<Action> _actions;
+	int _turn;
 };
 
 void Main()
@@ -153,5 +185,11 @@ void Main()
 	while (System::Update())
 	{
 		field.Draw(50, { 100, 10 });
+		field.Update();
+
+		if (KeyEnter.down())
+		{
+			field.NextStep();
+		}
 	}
 }
