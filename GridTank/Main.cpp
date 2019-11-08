@@ -4,7 +4,7 @@
 
 void Main()
 {
-	Game game(Field(), { Tank() });
+	Game game(Field(), { Tank(), Tank(Point(3, 3)), Tank(Point(7, 5)) });
 	
 	while (System::Update())
 	{

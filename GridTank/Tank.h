@@ -10,11 +10,11 @@ public:
 
 	double Rad() const { return ToRadians(Direction); }
 
-	Tank()
-	{
-		Pos = Point::Zero();
-		Direction = 0;
-	}
+	Tank() : Pos(Point::Zero()), Direction(0) {}
+	
+	Tank(Point pos) : Pos(pos), Direction(0) {}
+
+	Tank(Point pos, int dir_deg) : Pos(pos), Direction(dir_deg) {}
 
 	void Think();
 

@@ -4,7 +4,9 @@
 class Field
 {
 public:
-	Field();
+	Field() : _cells(Grid<int>(10, 10)), _turn(0) {};
+
+	Field(Size size) : _cells(Grid<int>(size.x, size.y)), _turn(0) {};
 
 	void NextStep();
 	
