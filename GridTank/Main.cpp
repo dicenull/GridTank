@@ -1,19 +1,14 @@
 ﻿
 # include <Siv3D.hpp> // OpenSiv3D v0.4.1
-#include "Field.h"
+#include "Game.h"
 
 void Main()
 {
-	Field field;
-
+	Game game(Field(), { Tank() });
+	
 	while (System::Update())
 	{
-		field.Draw(50, { 100, 10 });
-		field.Update();
-
-		if (KeyEnter.down())
-		{
-			field.NextStep();
-		}
+		game.Update();
+		game.Draw(50, { 100, 10 });
 	}
 }

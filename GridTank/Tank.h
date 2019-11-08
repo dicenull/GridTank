@@ -16,6 +16,12 @@ public:
 		Direction = 0;
 	}
 
+	void Think();
+
+	bool GetIsReady() const { return _isReady; }
+
+	void NextAction();
+
 public:
 	void ActionBy(Action action)
 	{
@@ -83,4 +89,6 @@ private:
 
 private:
 	bool _validBack;
+	Action _action;
+	bool _isReady;
 };
